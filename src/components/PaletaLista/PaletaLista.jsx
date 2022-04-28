@@ -28,6 +28,8 @@ function PaletaLista() {
           paleta={paleta}
           quantidadeSelecionada={paletaSelecionada[index]}
           index={index}
+          onAdd={(index) => adicionarItem(index)}
+          onRemove={(index) => removerItem(index)}
         />
       ))}
     </div>
