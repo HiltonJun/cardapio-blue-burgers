@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./PaletaLista.css";
-import { paletas } from "../mocks/paletas.js";
+import { paletas } from "mocks/paletas.js";
 
 function PaletaLista() {
   const removerItem = (paletaIndex) => {
