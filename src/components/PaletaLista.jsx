@@ -3,6 +3,18 @@ import "./PaletaLista.css";
 import { paletas } from "../mocks/paletas.js";
 
 function PaletaLista() {
+  const removerItem = (paletaIndex) => {
+    const paleta = {
+      [paletaIndex]: Number(paletaSelecionada[paletaIndex] || 0) - 1,
+    };
+    setPaletaSelecionada({ ...paletaSelecionada, ...paleta });
+  };
+  const removeButton = (canRender, index) =>
+    Boolean(canRender) && (
+      <button className="Acoes__remover" onClick={() => removerItem(index)}>
+        remover
+      </button>
+    );
   const badgeCounter = (canRender, index) =>
     Boolean(canRender) && (
       <span className="PaletaListaItem__badge">
@@ -25,6 +37,7 @@ function PaletaLista() {
       {paletas.map((paleta, index) => (
         <div className="PaletaListaItem" key={`PaletaListaItem-${index}`}>
           {badgeCounter(paletaSelecionada[index], index)}
+		  
           <div>
             <div className="PaletaListaItem__titulo"> {paleta.titulo} </div>
             <div className="PaletaListaItem__preco">
@@ -44,6 +57,7 @@ function PaletaLista() {
               >
                 adicionar
               </button>
+			  {removeButton(paletaSelecionada[index], index)}
             </div>
           </div>
           <img
