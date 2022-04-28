@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PaletaLista.css";
 import { paletas } from "mocks/paletas.js";
-import PaletaListaItem from "../PaletaListaItem/PaletaListaItem"
+import PaletaListaItem from "../PaletaListaItem/PaletaListaItem";
 
 function PaletaLista() {
   const removerItem = (paletaIndex) => {
@@ -23,7 +23,12 @@ function PaletaLista() {
   return (
     <div className="PaletaLista">
       {paletas.map((paleta, index) => (
-        <PaletaListaItem key={`PaletaListaItem-${index}`} />
+        <PaletaListaItem
+          key={`PaletaListaItem-${index}`}
+          paleta={paleta}
+          quantidadeSelecionada={paletaSelecionada[index]}
+          index={index}
+        />
       ))}
     </div>
   );
