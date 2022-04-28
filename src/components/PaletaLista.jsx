@@ -37,7 +37,9 @@ function PaletaLista() {
             </div>
             <div className="PaletaListaItem__acoes Acoes">
               <button
-                className="Acoes__adicionar Acoes__adicionar--preencher"
+                className={`Acoes__adicionar ${
+                  !paletaSelecionada[index] && "Acoes__adicionar--preencher"
+                }`}
                 onClick={() => adicionarItem(index)}
               >
                 adicionar
