@@ -1,8 +1,7 @@
 import "./Home.css";
-import sacola from "../../assets/icons/sacola.svg";
-import logo from "../../assets/logo.svg";
 import PaletaLista from "../../components/PaletaLista/PaletaLista";
 import Navbar from "../../components/Navbar/Navbar"
+import Overlay from "../../components/Overlay/Overlay"
 
 function Home() {
   return (
