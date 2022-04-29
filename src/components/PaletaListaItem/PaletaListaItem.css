@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-around;
   position: relative;
+  cursor: pointer;
 }
 
 @media (max-width: 400px) {
@@ -74,18 +75,18 @@
 }
 
 .PaletaListaItem__badge {
-    background-color: greenyellow;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    vertical-align: middle;
-    position: absolute;
-    color: black;
-    font-size: 0.8em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    top: -9px;
-    left: -9px;
-  }
+  background-color: greenyellow;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  position: absolute;
+  color: black;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -9px;
+  left: -9px;
+}

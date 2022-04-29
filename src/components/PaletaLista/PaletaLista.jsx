@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./PaletaLista.css";
 import { paletas } from "mocks/paletas.js";
 import PaletaListaItem from "../PaletaListaItem/PaletaListaItem";
+import PaletaDetalhesModal from "../PaletaDetalhesModal/PaletaDetalhesModal";
 
 function PaletaLista() {
   const removerItem = (paletaIndex) => {
@@ -12,6 +13,8 @@ function PaletaLista() {
   };
 
   const [paletaSelecionada, setPaletaSelecionada] = useState({});
+
+  const [paletaModal, setPaletaModal] = useState(false);
 
   const adicionarItem = (paletaIndex) => {
     const paleta = {
@@ -30,8 +33,15 @@ function PaletaLista() {
           index={index}
           onAdd={(index) => adicionarItem(index)}
           onRemove={(index) => removerItem(index)}
+          clickItem={(paletaId) => setPaletaModal(paleta)}
         />
       ))}
+      {paletaModal && (
+        <PaletaDetalhesModal
+          paleta={paletaModal}
+          closeModal={() => setPaletaModal(false)}
+        />
+      )}
     </div>
   );
 }

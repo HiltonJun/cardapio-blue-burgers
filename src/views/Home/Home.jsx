@@ -10,8 +10,6 @@ function Home() {
       <Navbar />
       <div className="Home__container">
         <PaletaLista />
-        <Overlay />
-        <Modal />
       </div>
     </div>
   );
