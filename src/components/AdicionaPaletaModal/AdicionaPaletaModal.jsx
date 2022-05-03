@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
-import "./AdicionaPaletamodal.css";
+import "./AdicionaPaletaModal.css";
 
 function AdicionaPaletaModal({ closeModal }) {
   const form = {
@@ -16,14 +16,33 @@ function AdicionaPaletaModal({ closeModal }) {
   const handleChange = (e, name) => {
     setState({ ...state, [name]: e.target.value });
   };
+
+  const [canDisable, setCanDisable] = useState(true);
+
+  const canDisableSendButton = () => {
+    const response = !Boolean(
+      state.descricao.length &&
+        state.foto.length &&
+        state.sabor.length &&
+        state.preco.length
+    );
+
+    setCanDisable(response);
+  };
+
+  useEffect(() => {
+    canDisableSendButton();
+  });
+
   return (
     <Modal closeModal={closeModal}>
       <div className="AdicionaPaletaModal">
-        <form autocomplete="false">
+        <form autoComplete="off">
           <h2>Adicionar ao Cardápio</h2>
           <div>
-            <label className="AdicionaPaletaModal__text" htmlFor="">
-              Preço
+            <label className="AdicionaPaletaModal__text" htmlFor="preco">
+              {" "}
+              Preço:{" "}
             </label>
             <input
               type="text"
@@ -31,6 +50,7 @@ function AdicionaPaletaModal({ closeModal }) {
               placeholder="R$"
               value={state.preco}
               onChange={(e) => handleChange(e, "preco")}
+              required
             />
           </div>
           <div>
@@ -44,6 +64,7 @@ function AdicionaPaletaModal({ closeModal }) {
               type="text"
               value={state.sabor}
               onChange={(e) => handleChange(e, "sabor")}
+              required
             />
           </div>
           <div>
@@ -70,6 +91,7 @@ function AdicionaPaletaModal({ closeModal }) {
               type="text"
               value={state.descricao}
               onChange={(e) => handleChange(e, "descricao")}
+              required
             />
           </div>
           <div>
@@ -86,14 +108,16 @@ function AdicionaPaletaModal({ closeModal }) {
               accept="image/png, image/gif, image/jpeg"
               value={state.foto}
               onChange={(e) => handleChange(e, "foto")}
+              required
             />
           </div>
-
-          <input
+          <button
             className="AdicionaPaletaModal__enviar"
-            type="submit"
-            value="Enviar"
-          />
+            type="button"
+            disabled={canDisable}
+          >
+            Enviar
+          </button>
         </form>
       </div>
     </Modal>
