@@ -4,7 +4,7 @@ import PaletaListaItem from "../PaletaListaItem/PaletaListaItem";
 import PaletaDetalhesModal from "../PaletaDetalhesModal/PaletaDetalhesModal";
 import { PaletaService } from "services/PaletaService";
 
-function PaletaLista({ paletaCriada }) {
+function PaletaLista({ paletaCriada, mode }) {
   const [paletas, setPaletas] = useState([]);
 
   const [paletaSelecionada, setPaletaSelecionada] = useState({});
@@ -40,6 +40,7 @@ function PaletaLista({ paletaCriada }) {
   useEffect(() => {
     getLista();
   }, []);
+
   const adicionarItem = (paletaIndex) => {
     const paleta = {
       [paletaIndex]: Number(paletaSelecionada[paletaIndex] || 0) + 1,
@@ -51,6 +52,7 @@ function PaletaLista({ paletaCriada }) {
     <div className="PaletaLista">
       {paletas.map((paleta, index) => (
         <PaletaListaItem
+          mode={mode}
           key={`PaletaListaItem-${index}`}
           paleta={paleta}
           quantidadeSelecionada={paletaSelecionada[index]}
