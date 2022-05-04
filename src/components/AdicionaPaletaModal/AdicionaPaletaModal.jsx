@@ -1,8 +1,9 @@
+import "./AdicionaPaletaModal.css";
 import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
-import "./AdicionaPaletaModal.css";
+import { PaletaService } from "services/PaletaService";
 
-function AdicionaPaletaModal({ closeModal }) {
+function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
   const form = {
     preco: "",
     sabor: "",
@@ -12,11 +13,6 @@ function AdicionaPaletaModal({ closeModal }) {
   };
 
   const [state, setState] = useState(form);
-
-  const handleChange = (e, name) => {
-    setState({ ...state, [name]: e.target.value });
-  };
-
   const [canDisable, setCanDisable] = useState(true);
 
   const canDisableSendButton = () => {
@@ -30,27 +26,52 @@ function AdicionaPaletaModal({ closeModal }) {
     setCanDisable(response);
   };
 
+  const handleChange = (e, name) => {
+    setState({ ...state, [name]: e.target.value });
+  };
+
   useEffect(() => {
     canDisableSendButton();
   });
+
+  const createPaleta = async () => {
+    const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split("\\").pop();
+
+    const { sabor, recheio, descricao, preco, foto } = state;
+
+    const titulo = sabor + (recheio && " com " + recheio);
+
+    const paleta = {
+      sabor: titulo,
+      descricao,
+      preco,
+      foto: `assets/images/${renomeiaCaminhoFoto(foto)}`,
+    };
+
+    const response = await PaletaService.create(paleta);
+
+    onCreatePaleta(response);
+
+    closeModal();
+  };
 
   return (
     <Modal closeModal={closeModal}>
       <div className="AdicionaPaletaModal">
         <form autoComplete="off">
-          <h2>Adicionar ao Cardápio</h2>
+          <h2> Adicionar ao Cardápio </h2>
           <div>
             <label className="AdicionaPaletaModal__text" htmlFor="preco">
               {" "}
-              Preço:{" "}
+              Preco:{" "}
             </label>
             <input
-              type="text"
               id="preco"
-              placeholder="R$"
+              placeholder="10,00"
+              type="text"
               value={state.preco}
-              onChange={(e) => handleChange(e, "preco")}
               required
+              onChange={(e) => handleChange(e, "preco")}
             />
           </div>
           <div>
@@ -63,8 +84,8 @@ function AdicionaPaletaModal({ closeModal }) {
               placeholder="Chocolate"
               type="text"
               value={state.sabor}
-              onChange={(e) => handleChange(e, "sabor")}
               required
+              onChange={(e) => handleChange(e, "sabor")}
             />
           </div>
           <div>
@@ -90,8 +111,8 @@ function AdicionaPaletaModal({ closeModal }) {
               placeholder="Detalhe o produto"
               type="text"
               value={state.descricao}
-              onChange={(e) => handleChange(e, "descricao")}
               required
+              onChange={(e) => handleChange(e, "descricao")}
             />
           </div>
           <div>
@@ -107,14 +128,16 @@ function AdicionaPaletaModal({ closeModal }) {
               type="file"
               accept="image/png, image/gif, image/jpeg"
               value={state.foto}
-              onChange={(e) => handleChange(e, "foto")}
               required
+              onChange={(e) => handleChange(e, "foto")}
             />
           </div>
+
           <button
             className="AdicionaPaletaModal__enviar"
             type="button"
             disabled={canDisable}
+            onClick={createPaleta}
           >
             Enviar
           </button>

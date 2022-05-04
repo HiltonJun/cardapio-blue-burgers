@@ -7,14 +7,18 @@ import AdicionaPaletaModal from "components/AdicionaPaletaModal/AdicionaPaletaMo
 function Home() {
   const [canShowAdicionaPaletaModal, setCanShowAdicionaPaletaModal] =
     useState(false);
+
+  const [paletaParaAdicionar, setPaletaParaAdicionar] = useState();
+
   return (
     <div className="Home">
       <Navbar createPaleta={() => setCanShowAdicionaPaletaModal(true)} />
       <div className="Home__container">
-        <PaletaLista />
+        <PaletaLista paletaCriada={paletaParaAdicionar} />
         {canShowAdicionaPaletaModal && (
           <AdicionaPaletaModal
             closeModal={() => setCanShowAdicionaPaletaModal(false)}
+            onCreatePaleta={(paleta) => setPaletaParaAdicionar(paleta)}
           />
         )}
       </div>

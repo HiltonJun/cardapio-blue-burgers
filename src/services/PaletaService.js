@@ -18,15 +18,29 @@ const transformPaleta = (paleta) => {
 const parseTransformLista = (response) =>
   parseResponse(response).then((paletas) => paletas.map(transformPaleta));
 
+const parseTransformItem = (response) =>
+  parseResponse(response).then(transformPaleta);
+
 export const PaletaService = {
   getLista: () =>
     fetch(Api.paletaLista(), { method: "GET" }).then(parseTransformLista),
   getById: (id) =>
-    fetch(Api.paletaById(id), { method: "GET" }).then(parseTransformLista),
-  create: () =>
-    fetch(Api.createPaleta(), { method: "POST" }).then(parseTransformLista),
+    fetch(Api.paletaById(id), { method: "GET" }).then(parseTransformItem),
+  create: (paleta) =>
+    fetch(Api.createPaleta(), {
+      method: "POST",
+      body: JSON.stringify(paleta),
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(parseTransformItem),
   updtateById: (id) =>
-    fetch(Api.updatePaletaById(id), { method: "PUT" }).then(parseTransformLista),
+    fetch(Api.updatePaletaById(id), { method: "PUT" }).then(
+      parseTransformLista
+    ),
   deleteById: (id) =>
-    fetch(Api.deletePaletaById(id), { method: "DELETE" }).then(parseTransformLista),
+    fetch(Api.deletePaletaById(id), { method: "DELETE" }).then(
+      parseTransformLista
+    ),
 };
