@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Home.css";
 import PaletaLista from "../../components/PaletaLista/PaletaLista";
 import Navbar from "../../components/Navbar/Navbar";
-import AdicionaPaletaModal from "components/AdicionaPaletaModal/AdicionaPaletaModal";
+import AdicionaPaletaModal from "components/AdicionaEditaPaletaModal/AdicionaEditaPaletaModal";
 
 function Home() {
   const [canShowAdicionaPaletaModal, setCanShowAdicionaPaletaModal] =

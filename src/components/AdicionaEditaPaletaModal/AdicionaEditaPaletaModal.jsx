@@ -1,9 +1,9 @@
-import "./AdicionaPaletaModal.css";
+import "./AdicionaEditaPaletaModal.css";
 import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
 import { PaletaService } from "services/PaletaService";
 
-function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
+function AdicionaEditaPaletaModal({ closeModal, onCreatePaleta }) {
   const form = {
     preco: "",
     sabor: "",
@@ -57,11 +57,11 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
 
   return (
     <Modal closeModal={closeModal}>
-      <div className="AdicionaPaletaModal">
+      <div className="AdicionaEditaPaletaModal">
         <form autoComplete="off">
           <h2> Adicionar ao Cardápio </h2>
           <div>
-            <label className="AdicionaPaletaModal__text" htmlFor="preco">
+            <label className="AdicionaEditaPaletaModal__text" htmlFor="preco">
               {" "}
               Preco:{" "}
             </label>
@@ -75,7 +75,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
             />
           </div>
           <div>
-            <label className="AdicionaPaletaModal__text" htmlFor="sabor">
+            <label className="AdicionaEditaPaletaModal__text" htmlFor="sabor">
               {" "}
               Sabor:{" "}
             </label>
@@ -89,7 +89,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
             />
           </div>
           <div>
-            <label className="AdicionaPaletaModal__text" htmlFor="recheio">
+            <label className="AdicionaEditaPaletaModal__text" htmlFor="recheio">
               {" "}
               Recheio:{" "}
             </label>
@@ -102,7 +102,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
             />
           </div>
           <div>
-            <label className="AdicionaPaletaModal__text" htmlFor="descricao">
+            <label className="AdicionaEditaPaletaModal__text" htmlFor="descricao">
               {" "}
               Descricao:{" "}
             </label>
@@ -117,13 +117,13 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
           </div>
           <div>
             <label
-              className="AdicionaPaletaModal__text  AdicionaPaletaModal__foto-label"
+              className="AdicionaEditaPaletaModal__text  AdicionaEditaPaletaModal__foto-label"
               htmlFor="foto"
             >
               {!state.foto.length ? "Selecionar Imagem" : state.foto}
             </label>
             <input
-              className=" AdicionaPaletaModal__foto"
+              className=" AdicionaEditaPaletaModal__foto"
               id="foto"
               type="file"
               accept="image/png, image/gif, image/jpeg"
@@ -134,7 +134,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
           </div>
 
           <button
-            className="AdicionaPaletaModal__enviar"
+            className="AdicionaEditaPaletaModal__enviar"
             type="button"
             disabled={canDisable}
             onClick={createPaleta}
@@ -147,4 +147,4 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
   );
 }
 
-export default AdicionaPaletaModal;
+export default AdicionaEditaPaletaModal;
