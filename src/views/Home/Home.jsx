@@ -47,6 +47,7 @@ function Home() {
       <Navbar
         mode={modoAtual}
         createPaleta={() => setCanShowAdicionaPaletaModal(true)}
+        deletePaleta={() => handleActions(ActionMode.DELETAR)}
         updatePaleta={() => handleActions(ActionMode.ATUALIZAR)}
       />
       <div className="Home__container">

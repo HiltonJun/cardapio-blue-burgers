@@ -116,3 +116,7 @@
     width: 100%;
   }
 }
+
+.Paleta--deletar {
+  background: rgba(211, 0, 0);
+}
