@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./PaletaLista.css";
 import PaletaListaItem from "../PaletaListaItem/PaletaListaItem";
 import PaletaDetalhesModal from "../PaletaDetalhesModal/PaletaDetalhesModal";
 import { PaletaService } from "services/PaletaService";
+import { ActionMode } from "constants/index";
 
-function PaletaLista({ paletaCriada, mode }) {
+function PaletaLista({ paletaCriada, mode, updatePaleta, deletePaleta, paletaEditada }) {
   const [paletas, setPaletas] = useState([]);
 
   const [paletaSelecionada, setPaletaSelecionada] = useState({});
@@ -25,21 +26,36 @@ function PaletaLista({ paletaCriada, mode }) {
 
   const getPaletaById = async (paletaId) => {
     const response = await PaletaService.getById(paletaId);
-    setPaletaModal(response);
-  };
 
-  const adicionaPaletaNaLista = (paleta) => {
-    const lista = [...paletas, paleta];
-    setPaletas(lista);
-  };
+    const mapper = {
+      [ActionMode.NORMAL]: () => setPaletaModal(response),
+      [ActionMode.ATUALIZAR]: () => updatePaleta(response),
+      [ActionMode.DELETAR]: () => deletePaleta(response),
+    };
 
-  useEffect(() => {
-    if (paletaCriada) adicionaPaletaNaLista(paletaCriada);
-  }, [paletaCriada]);
+    mapper[mode]();
+  };
 
   useEffect(() => {
     getLista();
-  }, []);
+  }, [paletaEditada]);
+
+  const adicionaPaletaNaLista = useCallback(
+    (paleta) => {
+      const lista = [...paletas, paleta];
+      setPaletas(lista);
+    },
+    [paletas]
+  );
+
+  useEffect(() => {
+    if (
+      paletaCriada &&
+      !paletas.map(({ id }) => id).includes(paletaCriada.id)
+    ) {
+      adicionaPaletaNaLista(paletaCriada);
+    }
+  }, [adicionaPaletaNaLista, paletaCriada, paletas]);
 
   const adicionarItem = (paletaIndex) => {
     const paleta = {

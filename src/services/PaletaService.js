@@ -47,7 +47,7 @@ export const PaletaService = {
         "Content-Type": "application/json",
       },
     }).then(parseResponse),
-    
+
   deleteById: (id) =>
     fetch(Api.deletePaletaById(id), { method: "DELETE" }).then(
       parseTransformLista
