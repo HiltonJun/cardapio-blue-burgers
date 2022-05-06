@@ -50,6 +50,6 @@ export const PaletaService = {
 
   deleteById: (id) =>
     fetch(Api.deletePaletaById(id), { method: "DELETE" }).then(
-      parseTransformLista
+      parseResponse
     ),
 };
