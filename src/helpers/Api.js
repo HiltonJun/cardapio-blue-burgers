@@ -16,7 +16,7 @@ const SacolaContext = {
 };
 
 export const Api = {
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://blue-burgers-server-fngxm8pzh-hiltonjun.vercel.app/",
   ...PaletaContext,
   ...SacolaContext,
 };
