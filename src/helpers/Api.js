@@ -16,7 +16,7 @@ const SacolaContext = {
 };
 
 export const Api = {
-  baseUrl: "",
+  baseUrl: "https://el-geladon-api-mod-3.onrender.com",
   ...PaletaContext,
   ...SacolaContext,
 };
