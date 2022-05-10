@@ -16,7 +16,7 @@ const SacolaContext = {
 };
 
 export const Api = {
-  baseUrl: "https://blue-burgers-server-fngxm8pzh-hiltonjun.vercel.app/",
+  baseUrl: "",
   ...PaletaContext,
   ...SacolaContext,
 };
